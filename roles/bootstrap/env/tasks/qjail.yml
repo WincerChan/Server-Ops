@@ -1,0 +1,9 @@
+- name: Install qjail
+  pkgng:
+    name: qjail
+    state: present
+
+- name: Enable qjail
+  service:
+    name: qjail.bootime
+    enabled: yes

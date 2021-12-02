@@ -1,0 +1,10 @@
+ext_if="{{ interface }}"
+int_if="lo1"
+jailnet= $int_if:network
+IP_PUB="{{ address }}"
+
+nat on $ext_if from $jailnet to any -> ($ext_if)
+
+TROJAN_PORT="{443}"
+
+rdr on $ext_if proto tcp from any to $IP_PUB port $TROJAN_PORT -> "10.5.0.86"

@@ -1,0 +1,4 @@
+- name: Install ansible
+  pkgng:
+    name: py{{py_version}}-ansible-core
+    state: present

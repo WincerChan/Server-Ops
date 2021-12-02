@@ -1,0 +1,13 @@
+- name: Configure pf.conf
+  vars:
+    interface: "{{ ansible_default_ipv4.interface }}"
+    address: "{{ ansible_default_ipv4.address }}"
+  template:
+    src: pf.conf.j2
+    dest: /etc/pf.conf
+
+- name: Enable pf
+  service:
+    name: pf
+    state: started
+    enabled: yes

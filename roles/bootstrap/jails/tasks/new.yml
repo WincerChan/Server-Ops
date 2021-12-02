@@ -1,0 +1,20 @@
+- name: Check if jail is already created
+  shell: "qjail list {{ jail_name }}"
+  register: jail_check
+
+- name:
+  when: "{{ 'Error' in jail_check.stdout }}"
+  blocks:
+    - name: Create Qjail
+      shell: qjail create -4 {{ jail_ip }} -n lo1 {{ jail_name }}
+
+    - name: Enable Raw Socket Rustc Jail
+      shell: "qjail config -k {{ jail_name }}"
+
+    - name: Restart pf
+      service:
+        name: pf
+        state: restarted
+
+    - name: Start rustc jail
+      shell: "qjail start {{ jail_name }}"

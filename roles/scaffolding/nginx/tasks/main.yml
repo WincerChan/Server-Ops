@@ -1,0 +1,6 @@
+- name: Install NGINX Inside Jail
+  local_action:
+    module: pkgng
+    name: nginx
+    jail: nginx
+    state: present

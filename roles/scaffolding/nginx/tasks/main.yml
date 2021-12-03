@@ -4,3 +4,11 @@
     name: nginx
     jail: nginx
     state: present
+
+- name: Copy NGINX Configuration
+  vars:
+    trojan_server: {{ lookup('env', 'TROJAN_HOST') }}
+  template:
+    src: nginx.conf.j2
+    dest: /usr/local/etc/nginx/nginx.conf
+  delegate_to: gateway

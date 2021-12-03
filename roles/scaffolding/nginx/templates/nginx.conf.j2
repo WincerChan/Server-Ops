@@ -1,0 +1,36 @@
+#user  nobody;
+worker_processes  1;
+load_module /usr/local/libexec/nginx/ngx_stream_module.so;
+
+# This default error log path is compiled-in to make sure configuration parsing
+# errors are logged somewhere, especially during unattended boot when stderr
+# isn't normally logged anywhere. This path will be touched on every nginx
+# start regardless of error log location configured here. See
+# https://trac.nginx.org/nginx/ticket/147 for more info.
+#
+#error_log  /var/log/nginx/error.log;
+#
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+stream {
+    map $ssl_preread_server_name $backend_name {
+        {{trojan_server}} trojan;
+	# default
+        default trojan;
+    }
+    upstream trojan {
+        server {{ hostvars['trojan']['jail_ip'] }}:443;
+    }
+    server {
+        listen 443 reuseport;
+	proxy_pass $backend_name;
+	ssl_preread on;
+    }
+}

@@ -1,3 +1,4 @@
 - hosts: deploy
+  connection: local
   roles:
     - bootstrap/env

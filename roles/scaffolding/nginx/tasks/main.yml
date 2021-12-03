@@ -11,4 +11,3 @@
   template:
     src: nginx.conf.j2
     dest: /usr/local/etc/nginx/nginx.conf
-  delegate_to: gateway

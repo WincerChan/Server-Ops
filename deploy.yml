@@ -2,3 +2,7 @@
   connection: local
   roles:
     - bootstrap/env
+
+- hosts: nginx
+  roles:
+    - scaffolding/nginx

@@ -2,10 +2,13 @@ all:
   hosts:
     crown:
     acme-sh:
+      ansible_connection: jail
       jail_ip: 10.5.0.10
     trojan:
+      ansible_connection: jail
       jail_ip: 10.5.0.15
-    gateway:
+    nginx:
+      ansible_connection: jail
       jail_ip: 10.5.0.86
 
     deploy:
@@ -16,4 +19,4 @@ all:
       hosts:
         acme-sh:
         gateway:
-        trojan:
+        nginx:

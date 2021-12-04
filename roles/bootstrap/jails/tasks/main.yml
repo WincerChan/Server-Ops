@@ -12,7 +12,7 @@
 
 - name: Create Jail for Jails Group
   vars:
-    jail_ip: "{{ hostvars['item']['jail_ip'] }}"
+    jail_ip: "{{ hostvars[item]['jail_ip'] }}"
     jail_name: "{{item}}"
   include: new.yml
   loop: "{{ groups['jails'] }}"

@@ -18,3 +18,11 @@
 
     - name: Start rustc jail
       shell: "qjail start {{ jail_name }}"
+    
+- name: Mount Host Local Bin
+  mount:
+    src: /usr/local/bin
+    dest: "{{ jail_dir }}/usr/local/host-bin"
+    fstype: nullfs
+    state: mounted
+    opts: ro

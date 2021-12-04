@@ -1,1 +1,2 @@
 ansible_connection: jail
+discovered_interpreter_python: /usr/jails/usr/local/host-bin/python3.8

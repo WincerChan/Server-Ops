@@ -21,7 +21,7 @@
     state: restarted
 
 - name: Disable Cron
-  when: "'{{ jail_name }}' not in {{ needs_cron }}"
+  when: "jail_name not in needs_cron"
   community.general.sysrc:
     name: cron_enable
     value: "NO"

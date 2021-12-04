@@ -1,0 +1,16 @@
+- name: Download trojan-go
+  get_url:
+    url: "{{ trojan_release }}"
+    dest: /tmp/trojan-go.zip
+
+- name: Ensure Trojan Path
+  file:
+    path: "{{ trojan_dir }}"
+    state: directory
+
+- name: Unzip trojan-go
+  unarchive:
+    src: /tmp/trojan-go.zip
+    dest: "{{ trojan_dir }}"
+    remote_src: yes
+

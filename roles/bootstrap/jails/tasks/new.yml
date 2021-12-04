@@ -20,16 +20,16 @@
     name: pf
     state: restarted
 
-- name: Disable Cron
-  when: "jail_name not in needs_cron"
-  community.general.sysrc:
-    name: cron_enable
-    value: "NO"
-    jail: "{{ jail_name }}"
+# - name: Disable Cron
+#   when: "jail_name not in needs_cron"
+#   community.general.sysrc:
+#     name: cron_enable
+#     value: "NO"
+#     jail: "{{ jail_name }}"
 
-- name: Diable Cron Flags
-  when: "jail_name not in needs_cron"
-  community.general.sysrc:
-    name: cron_flags
-    state: absent
-    jail: "{{ jail_name }}"
+# - name: Diable Cron Flags
+#   when: "jail_name not in needs_cron"
+#   community.general.sysrc:
+#     name: cron_flags
+#     state: absent
+#     jail: "{{ jail_name }}"

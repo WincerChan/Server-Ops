@@ -1,7 +1,9 @@
 - hosts: deploy
   roles:
-    - bootstrap/env
-
-- hosts: deploy
-  roles:
+    # - bootstrap/env
+    - bootstrap/jails
     - scaffolding/nginx
+
+- hosts: acme-sh
+  roles:
+    - scaffolding/acme

@@ -1,6 +1,7 @@
 all:
   hosts:
     crown:
+      ansible_connection: local
     acme-sh:
       ansible_connection: jail
       jail_ip: 10.5.0.10

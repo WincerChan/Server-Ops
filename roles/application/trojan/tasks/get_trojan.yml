@@ -12,3 +12,8 @@
 - name: Unzip trojan-go
   shell: unzip /tmp/trojan-go.zip -d {{ trojan_dir }}
 
+- name: Remove trojan-go.zip
+  file:
+    path: /tmp/trojan-go.zip
+    state: absent
+

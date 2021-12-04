@@ -9,8 +9,5 @@
     state: directory
 
 - name: Unzip trojan-go
-  unarchive:
-    src: /tmp/trojan-go.zip
-    dest: "{{ trojan_dir }}"
-    remote_src: yes
+  shell: unzip /tmp/trojan-go.zip -d {{ trojan_dir }}
 

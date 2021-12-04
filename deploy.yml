@@ -1,8 +1,7 @@
 - hosts: deploy
-  connection: local
   roles:
     - bootstrap/env
 
-- hosts: nginx
+- hosts: deploy
   roles:
     - scaffolding/nginx

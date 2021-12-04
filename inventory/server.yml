@@ -2,9 +2,9 @@ all:
   hosts:
     crown:
       ansible_connection: local
-    acme-sh:
+    acme:
       ansible_connection: jail
-      jail_ip: 10.5.0.10
+      jail_ip: 10.5.0.13
     trojan:
       ansible_connection: jail
       jail_ip: 10.5.0.15
@@ -20,5 +20,5 @@ all:
     jails:
       hosts:
         acme-sh:
-        gateway:
+        trojan:
         nginx:

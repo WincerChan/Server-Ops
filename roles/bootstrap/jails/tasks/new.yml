@@ -16,13 +16,13 @@
         name: pf
         state: restarted
 
-    - name: Start rustc jail
+    - name: Start Jails
       shell: "qjail start {{ jail_name }}"
     
-- name: Mount Host Local Bin
-  mount:
-    src: /usr/local/bin
-    path: "{{ jail_dir }}{{ jail_name }}/usr/local/host-bin"
-    fstype: nullfs
-    state: mounted
-    opts: ro
+# - name: Mount Host Local Bin
+#   mount:
+#     src: /usr/local/bin
+#     path: "{{ jail_dir }}{{ jail_name }}/usr/local/host-bin"
+#     fstype: nullfs
+#     state: mounted
+#     opts: ro

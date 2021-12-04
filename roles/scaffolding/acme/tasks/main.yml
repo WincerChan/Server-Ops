@@ -1,8 +1,9 @@
+- include_vars: roles/bootstrap/jails/vars/main.yml
 
 - name: Download Acme-sh
   get_url:
     url: https://get.acme.sh
-    dest: /tmp/acme.sh
+    dest: "{{ jail_dir }}tmp/acme.sh"
 
 - name: Run Acme-sh
-  shell: /tmp/acme.sh
+  shell: jexec acme-sh /tmp/acme.sh

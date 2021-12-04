@@ -3,3 +3,6 @@
 - name: Cert
   include: cert.yml
   loop: "{{ jails_cert }}"
+  tags:
+    - never
+    - gen_cert

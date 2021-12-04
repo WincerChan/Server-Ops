@@ -1,0 +1,8 @@
+
+- name: Download Acme-sh
+  get_url:
+    url: https://get.acme.sh
+    dest: /tmp/acme.sh
+
+- name: Run Acme-sh
+  shell: /tmp/acme.sh

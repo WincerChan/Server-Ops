@@ -1,2 +1,2 @@
 trojan_release: https://github.com/p4gefau1t/trojan-go/releases/latest/download/trojan-go-freebsd-amd64.zip
-trojan_dir: /root/trojan-go/
+trojan_dir: /root/trojan/

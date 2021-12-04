@@ -29,7 +29,7 @@
 
 - name: Disable Cron
   when: "{{ jail_name }} not in {{ needs_cron }}"
-  sysrc:
+  community.general.sysrc:
     name: cron_enable
     value: "NO"
     jail: "{{ jail_name }}"

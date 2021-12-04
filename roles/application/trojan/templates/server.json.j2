@@ -1,0 +1,44 @@
+{
+    "run_type": "server",
+    "local_addr": "0.0.0.0",
+    "local_port": 443,
+    "remote_addr": "www.baidu.com",
+    "remote_port": 443,
+    "password": [
+        "JKH&*tld78b"
+    ],
+    "ssl": {
+        "cert": "/root/cert/fullchain.cer",
+        "key": "/root/cert/download.hh2-9.itswincer.com.key",
+	"prefer_server_cipher": true,
+	"alpn": [
+	    "http/1.1"
+	],
+	"reuse_session": true,
+        "session_ticket": false,
+        "session_timeout": 600,
+        "plain_http_response": "",
+        "curves": "",
+        "dhparam": ""
+    },
+    "tcp": {
+        "prefer_ipv4": false,
+        "no_delay": true,
+        "keep_alive": true,
+        "reuse_port": false,
+        "fast_open": false,
+        "fast_open_qlen": 20
+    },
+    "websocket": {
+        "enabled": true,
+        "path": "/fdhk78/gfkf/gfkid/gffdjhku"
+    },
+    "router": {
+        "enabled": true,
+        "block": [
+            "geoip:private"
+        ],
+        "geoip": "{{ trojan_dir }}geoip.dat",
+        "geosite": "{{ trojan_dir }}geosite.dat"
+    }
+}

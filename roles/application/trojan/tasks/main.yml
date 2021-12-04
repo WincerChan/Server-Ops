@@ -1,0 +1,9 @@
+- name: Download trojan-go
+  get_url:
+    url: "{{ trojan_release }}"
+    dest: /root/trojan-go.zip
+
+- name: Unzip trojan-go
+  unarchive:
+    src: /root/trojan-go.zip
+    dest: /root/trojan-go

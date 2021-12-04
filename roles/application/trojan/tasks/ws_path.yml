@@ -1,0 +1,8 @@
+- name: Append Path
+  set_fact:
+    ws_path: "{{ ws_path|default([]) + [lookup('password', '/dev/null chars=ascii_lowercase')] }}"
+  loop: [1,2,3,4]
+
+- name: print ws_path
+  debug:
+    var: ws_path

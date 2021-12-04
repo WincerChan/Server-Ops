@@ -3,7 +3,7 @@
   register: jail_check
 
 - name:
-  when: 'Error' in jail_check.stdout
+  when: "'Error' in jail_check.stdout"
   block:
     - name: Create Qjail
       shell: qjail create -4 {{ jail_ip }} -n lo1 {{ jail_name }}

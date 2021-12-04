@@ -1,9 +1,17 @@
 - name: Download trojan-go
   get_url:
     url: "{{ trojan_release }}"
-    dest: /root/trojan-go.zip
+    dest: /tmp/trojan-go.zip
 
 - name: Unzip trojan-go
   unarchive:
-    src: /root/trojan-go.zip
-    dest: /root/trojan-go
+    src: /tmp/trojan-go.zip
+    dest: "{{ trojan_dir }}"
+
+- block:
+  - include: ws_path.yml
+
+  - name: Configure trojan-go
+    template:
+      src: server.json.j2
+      dest: "{{ trojan_dir }}/config/server.json"

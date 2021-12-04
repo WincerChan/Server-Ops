@@ -1,1 +1,3 @@
 jail_dir: /usr/jails/
+need_tron:
+  - acme-sh

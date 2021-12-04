@@ -14,4 +14,4 @@
 - include: mount.yml
   vars:
     jail_name: "{{ item }}"
-  loop: needs_mount
+  loop: "{{ needs_mount }}"

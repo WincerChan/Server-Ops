@@ -21,15 +21,19 @@
 
 - name: Mount Host Local Bin
   mount:
-    src: /usr/local/bin
-    path: "{{ jail_dir }}{{ jail_name }}/usr/local/host-bin"
+    src: "/usr/local/{{ item }}"
+    path: "{{ jail_dir }}{{ jail_name }}/usr/local/host-{{ item }}"
     fstype: nullfs
     state: mounted
     opts: ro
+  loop:
+    - bin
+    - lib
 
 - name: Disable Cron
-  when: "{{ jail_name }} not in {{ needs_cron }}"
+  when: "'{{ jail_name }}' not in {{ needs_cron }}"
   community.general.sysrc:
     name: cron_enable
     value: "NO"
     jail: "{{ jail_name }}"
+  delegate_to: "{{ jail_name }}"

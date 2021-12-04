@@ -4,7 +4,7 @@
 
 - name:
   when: "{{ 'Error' in jail_check.stdout }}"
-  blocks:
+  block:
     - name: Create Qjail
       shell: qjail create -4 {{ jail_ip }} -n lo1 {{ jail_name }}
 

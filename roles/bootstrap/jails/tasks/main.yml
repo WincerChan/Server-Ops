@@ -7,8 +7,9 @@
 - name: Disable Cron
   lineinfile:
     dest: "{{ jail_dir }}/flavors/default/etc/rc.conf"
-    regexp: ^cron_enable="YES"
-    line: cron_enable="NO"
+    regexp: ^cron
+    state: absent
+
 
 - name: Create Jail for Jails Group
   vars:

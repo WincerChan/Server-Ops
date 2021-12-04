@@ -19,16 +19,14 @@
     - name: Start Jails
       shell: "qjail start {{ jail_name }}"
 
-- name: Mount Host Local Bin
-  mount:
-    src: "/usr/local/{{ item }}"
-    path: "{{ jail_dir }}{{ jail_name }}/usr/local/host-{{ item }}"
-    fstype: nullfs
-    state: mounted
-    opts: ro
+- include: mount.yml
   loop:
-    - bin
-    - lib
+    - src: bin
+      dest: /root/bin
+    - src: lib
+      dest: /usr/local/lib
+  loop_control:
+    loop_var: inside
 
 - name: Disable Cron
   when: "'{{ jail_name }}' not in {{ needs_cron }}"

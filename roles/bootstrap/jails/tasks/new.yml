@@ -22,7 +22,7 @@
 - name: Mount Host Local Bin
   mount:
     src: /usr/local/bin
-    dest: "{{ jail_dir }}/usr/local/host-bin"
+    path: "{{ jail_dir }}/usr/local/host-bin"
     fstype: nullfs
     state: mounted
     opts: ro

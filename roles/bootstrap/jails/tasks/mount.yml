@@ -22,9 +22,7 @@
     loop_var: inside
 
 - name: Set Fish as Default Shell
-  user:
-    name: "root"
-    shell: /usr/local/bin/fish
+  shell: "jexec {{ jail_name }} chsh -s /usr/local/bin/fish"
 
 - name: Start Jail
   shell: "qjail restart {{ jail_name }}"

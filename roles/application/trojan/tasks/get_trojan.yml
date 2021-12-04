@@ -5,8 +5,9 @@
 
 - name: Ensure Trojan Path
   file:
-    path: "{{ trojan_dir }}"
+    path: "{{ trojan_dir }}{{ item }}"
     state: directory
+  loop: ["", "config"]
 
 - name: Unzip trojan-go
   shell: unzip /tmp/trojan-go.zip -d {{ trojan_dir }}

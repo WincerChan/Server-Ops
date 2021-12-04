@@ -1,10 +1,5 @@
-- include_vars: roles/bootstrap/jails/vars/main.yml
+- include: install.yml
 
-- name: Download Acme-sh
-  get_url:
-    url: https://get.acme.sh
-    dest: "/tmp/acme.sh"
-    mode: '0700'
-
-- name: Run Acme-sh
-  shell: /tmp/acme.sh
+- name: Cert
+  include: cert.yml
+  loop: '{{ jails_cert }}"

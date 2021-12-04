@@ -1,0 +1,14 @@
+- name: Set Domain as Fact
+  set_fact:
+    acme_domain: "{{ item | upper }}_HOST"
+
+- name: Generate Certificate
+  shell: "~/.acme.sh/acme.sh --issue --dns dns_cf --server letsencrypt -d {{ acme_domain }}"
+
+- name: Create Directory
+  file:
+    path: "/root/certs/{{ acme_domain }}"
+    state: directory
+
+- name: Install Certificate
+  shell: "~/.acme.sh/acme.sh --install-cert -d {{ acme_domain }} --key-file /root/certs/{{ acme_domain }}/priv.key --fullchain-file /root/certs/{{ acme_domain }}/fullchain.cer"

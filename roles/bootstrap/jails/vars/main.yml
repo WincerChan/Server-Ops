@@ -3,4 +3,4 @@ needs_cron:
   - acme-sh
 needs_mount:
   - acme-sh
-  - trojan
+  - trojan-go

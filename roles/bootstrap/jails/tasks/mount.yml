@@ -21,6 +21,10 @@
   loop_control:
     loop_var: inside
 
+- name:
+  debug:
+    var: "jexec {{ jail_name }} chsh -s /usr/local/bin/fish"
+  
 - name: Set Fish as Default Shell
   shell: "jexec {{ jail_name }} chsh -s /usr/local/bin/fish"
 

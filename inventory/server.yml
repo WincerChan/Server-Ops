@@ -5,7 +5,7 @@ all:
     acme:
       ansible_connection: jail
       jail_ip: 10.5.0.13
-    trojan:
+    trojan-go:
       ansible_connection: jail
       jail_ip: 10.5.0.15
     nginx:
@@ -20,5 +20,5 @@ all:
     jails:
       hosts:
         acme-sh:
-        trojan:
+        trojan-go:
         nginx:

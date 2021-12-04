@@ -14,6 +14,7 @@
 
 - name: Start Jails
   shell: "qjail start {{ jail_name }}"
+  when: "jail_name not in needs_mount"
 
 - name: Restart pf
   service:

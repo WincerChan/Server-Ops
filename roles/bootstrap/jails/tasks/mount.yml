@@ -20,3 +20,6 @@
     - lib
   loop_control:
     loop_var: inside
+
+- name: Start Jail
+  shell: "qjail start {{ jail_name }}"

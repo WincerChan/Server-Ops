@@ -1,13 +1,14 @@
 - name: Install NGINX Inside Jail
-  local_action:
-    module: pkgng
+  pkgng:
     name: nginx
     jail: nginx
     state: present
+
+- include_vars: bootstrap/jails/vars/main.yml
 
 - name: Copy NGINX Configuration
   vars:
     trojan_server: "{{ lookup('env', 'TROJAN_HOST') }}"
   template:
     src: nginx.conf.j2
-    dest: /usr/local/etc/nginx/nginx.conf
+    dest: "{{ jail_dir }}nginx/usr/local/etc/nginx/nginx.conf"

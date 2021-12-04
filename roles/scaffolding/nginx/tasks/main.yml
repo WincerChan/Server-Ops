@@ -12,3 +12,12 @@
   template:
     src: nginx.conf.j2
     dest: "{{ jail_dir }}nginx/usr/local/etc/nginx/nginx.conf"
+
+- name: Enable NGINX at Boot
+  community.general.sysrc:
+    name: nginx_enable
+    value: "YES"
+    jail: "nginx"
+
+- name: Restart NGINX
+  shell: "jexec nginx service nginx restart"

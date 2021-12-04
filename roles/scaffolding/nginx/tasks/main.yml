@@ -4,7 +4,7 @@
     jail: nginx
     state: present
 
-- include_vars: bootstrap/jails/vars/main.yml
+- include_vars: roles/bootstrap/jails/vars/main.yml
 
 - name: Copy NGINX Configuration
   vars:

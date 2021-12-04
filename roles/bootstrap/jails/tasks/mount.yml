@@ -1,12 +1,12 @@
 - name: Create Dest Dir
   file:
-    path: "{{ jail_dir }}{{ jail_name }}/{{ inside.dest }}"
+    path: "{{ jail_dir }}{{ jail_name }}{{ inside.dest }}"
     state: directory
 
 - name: Mount Local Bin
   mount:
     src: "/usr/local/{{ inside.src }}"
-    path: "{{ jail_dir }}{{ jail_name }}/{{ inside.dest }}"
+    path: "{{ jail_dir }}{{ jail_name }}{{ inside.dest }}"
     fstype: nullfs
     state: mounted
     opts: ro

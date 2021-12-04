@@ -11,22 +11,14 @@
     - name: Enable Raw Socket Rustc Jail
       shell: "qjail config -k {{ jail_name }}"
 
-    - name: Restart pf
-      service:
-        name: pf
-        state: restarted
-
     - name: Start Jails
       shell: "qjail start {{ jail_name }}"
 
-- include: mount.yml
-  loop:
-    - src: bin
-      dest: /root/bin
-    - src: lib
-      dest: /usr/local/lib
-  loop_control:
-    loop_var: inside
+- name: Restart pf
+  service:
+    name: pf
+    state: restarted
+
 
 - name: Disable Cron
   when: "'{{ jail_name }}' not in {{ needs_cron }}"
@@ -34,4 +26,3 @@
     name: cron_enable
     value: "NO"
     jail: "{{ jail_name }}"
-  delegate_to: "{{ jail_name }}"

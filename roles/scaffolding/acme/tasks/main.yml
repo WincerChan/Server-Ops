@@ -3,16 +3,7 @@
 - name: Download Acme-sh
   get_url:
     url: https://get.acme.sh
-    dest: "{{ jail_dir }}tmp/acme.sh"
-
-- include: mount.yml
-  vars:
-    jail_name: acme-sh
-  loop:
-    - src: bin
-      dest: /root/bin
-    - src: lib
-      dest: /usr/local/lib
+    dest: "/tmp/acme.sh"
 
 - name: Run Acme-sh
-  shell: jexec acme-sh /tmp/acme.sh
+  shell: /tmp/acme.sh

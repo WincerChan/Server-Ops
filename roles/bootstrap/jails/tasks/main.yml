@@ -1,3 +1,8 @@
+- include: umount.yml
+  vars:
+    jail_name: "{{ item }}"
+  loop: "{{ needs_mount }}"
+
 - name: Disable Syslogd
   lineinfile:
     dest: "{{ jail_dir }}/flavors/default/etc/rc.conf"

@@ -1,0 +1,9 @@
+- name: UMount Local Bin
+  mount:
+    path: "{{ jail_dir }}{{ jail_name }}/usr/local/{{ inside }}"
+    state: unmounted
+  loop:
+    - bin
+    - lib
+  loop_control:
+    loop_var: inside

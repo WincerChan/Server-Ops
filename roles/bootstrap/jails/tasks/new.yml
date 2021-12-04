@@ -32,3 +32,4 @@
   community.general.sysrc:
     name: cron_flags
     state: absent
+    jail: "{{ jail_name }}"

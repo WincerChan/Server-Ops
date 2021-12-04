@@ -4,13 +4,6 @@
     regexp: ^syslogd_enable="YES"
     line: syslogd_enable="NO"
 
-- name: Disable Cron
-  lineinfile:
-    dest: "{{ jail_dir }}/flavors/default/etc/rc.conf"
-    regexp: ^cron
-    state: absent
-
-
 - name: Create Jail for Jails Group
   vars:
     jail_ip: "{{ hostvars[item]['jail_ip'] }}"

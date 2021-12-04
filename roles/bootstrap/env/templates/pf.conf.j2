@@ -7,4 +7,4 @@ nat on $ext_if from $jailnet to any -> ($ext_if)
 
 TROJAN_PORT="{443}"
 
-rdr on $ext_if proto tcp from any to $IP_PUB port $TROJAN_PORT -> "{{ hostvars['gateway']['jail_ip'] }}"
+rdr on $ext_if proto tcp from any to $IP_PUB port $TROJAN_PORT -> "{{ hostvars['nginx']['jail_ip'] }}"

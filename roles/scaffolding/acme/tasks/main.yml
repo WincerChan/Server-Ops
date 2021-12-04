@@ -2,4 +2,4 @@
 
 - name: Cert
   include: cert.yml
-  loop: '{{ jails_cert }}"
+  loop: "{{ jails_cert }}"

@@ -1,12 +1,22 @@
 - name: Create Dest Dir
   file:
-    path: "{{ jail_dir }}{{ jail_name }}{{ inside.dest }}"
+    path: "{{ jail_dir }}{{ jail_name }}/usr/local/{{ inside }}"
     state: directory
+  loop:
+    - bin
+    - lib
+  loop_control:
+    loop_var: inside
 
 - name: Mount Local Bin
   mount:
-    src: "/usr/local/{{ inside.src }}"
-    path: "{{ jail_dir }}{{ jail_name }}{{ inside.dest }}"
+    src: "/usr/local/{{ inside }}"
+    path: "{{ jail_dir }}{{ jail_name }}/usr/local/{{ inside }}"
     fstype: nullfs
     state: mounted
     opts: ro
+  loop:
+    - bin
+    - lib
+  loop_control:
+    loop_var: inside

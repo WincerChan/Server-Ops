@@ -11,14 +11,14 @@
     - name: Enable Raw Socket Rustc Jail
       shell: "qjail config -k {{ jail_name }}"
 
-    - name: Start Jails
-      shell: "qjail start {{ jail_name }}"
+
+- name: Start Jails
+  shell: "qjail start {{ jail_name }}"
 
 - name: Restart pf
   service:
     name: pf
     state: restarted
-
 
 - name: Disable Cron
   when: "'{{ jail_name }}' not in {{ needs_cron }}"

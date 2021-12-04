@@ -1,3 +1,6 @@
 jail_dir: /usr/jails/
 needs_cron:
   - acme-sh
+needs_mount:
+  - acme-sh
+  - trojan

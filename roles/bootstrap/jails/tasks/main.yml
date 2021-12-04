@@ -10,3 +10,8 @@
     jail_name: "{{item}}"
   include: new.yml
   loop: "{{ groups['jails'] }}"
+
+- include: mount.yml
+  vars:
+    jail_name: "{{ item }}"
+  loop: needs_mount

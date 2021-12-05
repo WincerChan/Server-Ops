@@ -5,5 +5,9 @@
     - scaffolding/nginx
 
 - hosts: acme-sh
+  environment:
+    CF_Token: "{{ CF_Token }}"
+    CF_Account_ID: "{{ CF_Account_ID }}"
+    CF_Zone_ID: "{{ CF_Zone_ID }}"
   roles:
     - scaffolding/acme

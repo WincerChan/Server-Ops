@@ -3,14 +3,42 @@
     acme_domain: "{{ item | upper }}_HOST"
   set_fact:
     real_domain: "{{ lookup('env', acme_domain) }}"
+  tags:
+    - gen_cert
+
+- include_vars: roles/bootstrap/jails/vars/main.yml
+  tags:
+    - gen_cert
+
+- name: Create Certs Directory
+  local_action:
+    module: file
+    path: "{{ inside }}"
+    state: directory
+  loop:
+    - "{{ jail_dir }}acme-sh/root/certs/"
+    - "{{ jail_dir }}acme-sh/root/certs/{{ real_domain }}"
+    - "{{ jail_dir }}{{ item }}/root/cert"
+  loop_control:
+    loop_var: inside
+  tags:
+    - gen_cert
 
 - name: Generate Certificate
-  shell: "~/.acme.sh/acme.sh --issue --dns dns_cf --server letsencrypt -d {{ real_domain }}"
-
-- name: Create Directory
-  file:
-    path: "/root/certs/{{ real_domain }}"
-    state: directory
+  command: "fish -c '~/.acme.sh/acme.sh --issue --dns dns_cf --server letsencrypt -d {{ real_domain }}'"
 
 - name: Install Certificate
   shell: "~/.acme.sh/acme.sh --install-cert -d {{ real_domain }} --key-file /root/certs/{{ real_domain }}/priv.key --fullchain-file /root/certs/{{ real_domain }}/fullchain.cer"
+  tags:
+    - gen_cert
+
+- name: Mount Certs to Target
+  local_action:
+    module: mount
+    src: "{{ jail_dir }}acme-sh/root/certs/{{ real_domain }}"
+    path: "{{ jail_dir }}{{ item }}/root/cert/"
+    fstype: nullfs
+    state: mounted
+    opts: ro
+  tags:
+    - gen_cert

@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# PROVIDE: trojan
+# REQUIRE: networking
+# KEYWORD: 
+ 
+. /etc/rc.subr
+ 
+name="trojan"
+rcvar="trojan_enable"
+command="/root/trojan/trojan-go -config /root/trojan/config/server.json"
+trojan_user="root"
+pidfile="/var/run/${name}.pid"
+ 
+start_cmd="trojan_start"
+stop_cmd="trojan_stop"
+status_cmd="trojan_status"
+
+trojan_start() {
+        /usr/sbin/daemon -P ${pidfile} -r -f -u $trojan_user $command
+}
+
+trojan_stop() {
+        if [ -e "${pidfile}" ]; then
+                kill -s TERM `cat ${pidfile}`
+        else
+                echo "${name} is not running"
+        fi
+
+}
+
+trojan_status() {
+        if [ -e "${pidfile}" ]; then
+                echo "${name} is running as pid `cat ${pidfile}`"
+        else
+                echo "${name} is not running"
+        fi
+}
+ 
+load_rc_config $name
+: ${trojan_enable:=no}
+ 
+run_rc_command "$1"

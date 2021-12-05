@@ -11,3 +11,9 @@
     CF_Zone_ID: "{{ CF_Zone_ID }}"
   roles:
     - scaffolding/acme
+
+- hosts: trojan
+  roles:
+    - application/trojan
+  tags:
+    - trojan

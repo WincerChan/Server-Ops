@@ -7,3 +7,9 @@
     template:
       src: server.json.j2
       dest: "{{ trojan_dir }}/config/server.json"
+
+- name: Disable Cron
+  service:
+    name: cron
+    state: stopped
+    enabled: no

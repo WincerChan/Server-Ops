@@ -1,0 +1,16 @@
+- name: Src Path Exists
+  stat:
+    path: "{{ conf_path }}"
+  register: src_path
+
+- name:
+  block:
+    - name: Download Freebsd Src
+      get_url:
+        url: "ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/13.0-RELEASE/src.txz"
+        dest: /tmp/src.txz
+    - name: Extract Src
+      unarchive:
+        src: /tmp/src.txz
+        dest: /
+  when: src_path.stat.exists

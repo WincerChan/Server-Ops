@@ -1,0 +1,10 @@
+- name: Enable kld
+  community.general.sysrc:
+    name: kld_list
+    value: tcp_bbr
+    state: value_present
+
+- name: Enable bbr
+  community.general.sysrc:
+    name: net.inet.tcp.functions_default
+    value: bbr

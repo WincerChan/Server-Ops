@@ -1,0 +1,28 @@
+- name: Copy BBR Kernel
+  copy:
+    src: "{{ conf_path }}GENERIC"
+    dest: "{{ conf_path }}GENERIC-BBR"
+    remote_src: yes
+
+- name: Repalce Default Kernel
+  lineinfile:
+    path: "{{ conf_path }}GENERIC-BBR"
+    regexp: "^ident"
+    line: "ident           GENERIC-BBR\noptions         TCPHPTS\nmakeoptions     WITH_EXTRA_TCP_STACKS=1"
+
+- name: Config BBR Kernel
+  shell: "/usr/sbin/config GENERIC-BBR"
+  args:
+    chdir: "{{ conf_path }}"
+
+- name: Make Somethings
+  make:
+    chdir: "{{ conf_path }}../compile/GENERIC-BBR"
+    target: "{{ item }}"
+    params:
+      NUM_THREADS: "{{ ansible_processor_count }}"
+  loop:
+    - cleandepend
+    - depend
+    - 
+    - install

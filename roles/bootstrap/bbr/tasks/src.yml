@@ -13,4 +13,4 @@
       unarchive:
         src: /tmp/src.txz
         dest: /
-  when: src_path.stat.exists
+  when: not src_path.stat.exists

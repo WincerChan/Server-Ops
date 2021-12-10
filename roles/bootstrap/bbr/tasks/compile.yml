@@ -7,8 +7,9 @@
 - name: Repalce Default Kernel
   lineinfile:
     path: "{{ conf_path }}GENERIC-BBR"
-    regexp: "^ident"
+    regexp: "^ident(.*?)GENERIC$"
     line: "ident           GENERIC-BBR\noptions         TCPHPTS\nmakeoptions     WITH_EXTRA_TCP_STACKS=1"
+    backrefs: yes
 
 - name: Config BBR Kernel
   shell: "/usr/sbin/config GENERIC-BBR"

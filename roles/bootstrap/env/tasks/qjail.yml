@@ -1,6 +1,8 @@
 - name: Install qjail
   pkgng:
-    name: qjail
+    name:
+      - qjail
+      - py{{py_version}}-netaddr
     state: present
 
 - name: Enable qjail

@@ -10,10 +10,13 @@
     regexp: ^syslogd_enable="YES"
     line: syslogd_enable="NO"
 
+- include_vars: roles/bootstrap/env/vars/main.yml
+
+- set_fact:
+    jail_ipv4: "{{ ipv4_local }}"
+    jail_ipv6: "{{ ipv6_addr }}"
+
 - name: Create Jail for Jails Group
-  vars:
-    jail_ip: "{{ hostvars[item]['jail_ip'] }}"
-    jail_name: "{{item}}"
   include: new.yml
   loop: "{{ groups['jails'] }}"
 

@@ -1,6 +1,11 @@
+- name: Compile BBR Kernel
+  hosts: deploy
+  roles:
+    - role: bootstrap/bbr
+
 - hosts: deploy
   roles:
-    # - bootstrap/env
+    - bootstrap/env
     - bootstrap/jails
     - scaffolding/nginx
 

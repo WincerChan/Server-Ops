@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# PROVIDE: search_api
+# REQUIRE: networking
+# KEYWORD: 
+ 
+. /etc/rc.subr
+ 
+name="search_api"
+rcvar="search_api_enable"
+command="{{ search_api_dir }}search-api -c {{ search_api_dir }}config.toml"
+trojan_user="root"
+pidfile="/var/run/${name}.pid"
+ 
+start_cmd="search_api_start"
+stop_cmd="search_api_stop"
+status_cmd="search_api_status"
+
+trojan_start() {
+        /usr/sbin/daemon -P ${pidfile} -r -f -u $trojan_user $command
+}
+
+trojan_stop() {
+        if [ -e "${pidfile}" ]; then
+                kill -s TERM `cat ${pidfile}`
+        else
+                echo "${name} is not running"
+        fi
+
+}
+
+trojan_status() {
+        if [ -e "${pidfile}" ]; then
+                echo "${name} is running as pid `cat ${pidfile}`"
+        else
+                echo "${name} is not running"
+        fi
+}
+ 
+load_rc_config $name
+: ${search_api_enable:=no}
+ 
+run_rc_command "$1"

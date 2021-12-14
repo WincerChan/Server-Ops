@@ -1,0 +1,3 @@
+search_api_release: https://github.com/WincerChan/search-api/releases/latest/download/search-api-freebsd-amd64
+search_api_dir: /root/search-api/
+search_api_data_dir: /root/search-data/

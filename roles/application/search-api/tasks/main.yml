@@ -1,0 +1,4 @@
+- name: Download Latest Source
+  get_url:
+    url: "{{ search_api_release }}"
+    dest: "{{ search_api_dir }}/search-api"

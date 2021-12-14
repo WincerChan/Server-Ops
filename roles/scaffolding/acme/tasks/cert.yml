@@ -1,6 +1,6 @@
 - name: Set Domain as Fact
   vars:
-    acme_domain: "{{ item | upper }}_server"
+    acme_domain: "{{ item }}_server"
   set_fact:
     real_domain: "{{ lookup('vars', acme_domain) }}"
   tags:

@@ -11,7 +11,7 @@
   when: "'Error' in jail_check.stdout"
   block:
     - name: Create Qjail
-      shell: qjail create -4 {{ ipv4_interface }}|{{ jail_ipv4 }} -6 {{ ipv6_interface }}|{{ jail_ipv6 }} {{ jail_name }}
+      shell: qjail create -4 {{ jail_ipv4 }} -6 {{ jail_ipv6 }} {{ jail_name }}
 
     - name: Enable Raw Socket Rustc Jail
       shell: "qjail config -k {{ jail_name }}"

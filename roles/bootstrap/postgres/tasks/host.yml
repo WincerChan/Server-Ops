@@ -6,7 +6,7 @@
 
 - name: Update sysv config
   lineinfile:
-    path: "/usr/local/etc/qjail.config/{{ ansible_host }}"
+    path: "/usr/local/etc/qjail.config/{{ jail_name }}"
     line: "sysvmsg		    = \"new\";\nsysvsem             = \"new\";\nsysvshm             = \"new\";"
     insertbefore: "^}"
     state: present

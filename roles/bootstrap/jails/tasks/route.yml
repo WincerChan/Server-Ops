@@ -1,0 +1,11 @@
+- name: Update IP Address
+  set_fact:
+    jail_ipv4: "{{ (jail_ipv4 + ipv4_router_prefix) | ipaddr('next_usable') }}"
+
+- name: Update Current Jail
+  lineinfile:
+    path: "{{ jail_dir }}{{ inside }}/etc/hosts"
+    line: "{{ jail_ipv4 }} {{ item }}"
+  loop: "{{ groups['jails'] }}"
+  loop_control:
+    loop_var: inside

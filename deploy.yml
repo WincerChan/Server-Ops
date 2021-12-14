@@ -2,14 +2,23 @@
   hosts: deploy
   roles:
     - role: bootstrap/bbr
+  tags:
+    - never
 
-- hosts: deploy
+- name: Deploy Bootstrap
+  hosts: deploy
   roles:
     - bootstrap/env
     - bootstrap/jails
+    - bootstrap/postgres
+
+- name: Deploy Nginx
+  hosts: deploy
+  roles:
     - scaffolding/nginx
 
-- hosts: acme-sh
+- name: Deploy Acme-Sh
+  hosts: acme-sh
   environment:
     CF_Token: "{{ CF_Token }}"
     CF_Account_ID: "{{ CF_Account_ID }}"
@@ -17,7 +26,8 @@
   roles:
     - scaffolding/acme
 
-- hosts: trojan
+- name: Deploy Trojan
+  hosts: trojan
   roles:
     - application/trojan
   tags:

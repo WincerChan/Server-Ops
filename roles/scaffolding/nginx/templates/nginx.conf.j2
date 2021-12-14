@@ -26,7 +26,7 @@ stream {
         default trojan;
     }
     upstream trojan {
-        server {{ hostvars['trojan']['jail_ip'] }}:443;
+        server trojan:443;
     }
     server {
         listen 443 reuseport;

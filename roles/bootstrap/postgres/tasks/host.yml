@@ -1,0 +1,12 @@
+- name: Install PostgreSQL
+  pkgng:
+    name: "postgresql{{ pg_version }}-server"
+    state: present
+    jail: postgres
+
+- name: Update sysv config
+  lineinfile:
+    path: "/usr/local/etc/qjail.config/{{ ansible_host }}"
+    line: "sysvmsg		    = \"new\";\nsysvsem             = \"new\";\nsysvshm             = \"new\";"
+    insertbefore: "^}"
+    state: present

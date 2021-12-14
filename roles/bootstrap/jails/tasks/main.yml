@@ -20,7 +20,7 @@
   include: new.yml
   loop: "{{ groups['jails'] }}"
   loop_control:
-    loop_var: "{{ jail_name }}"
+    loop_var: jail_name
 
 - set_fact:
     jail_ipv4: "{{ ipv4_local }}"

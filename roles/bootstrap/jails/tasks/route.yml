@@ -8,4 +8,4 @@
     line: "{{ jail_ipv4 }} {{ item }}"
   loop: "{{ groups['jails'] }}"
   loop_control:
-    loop_var: "{{ inside }}"
+    loop_var: inside

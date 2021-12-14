@@ -1,8 +1,8 @@
 - name: Set Domain as Fact
   vars:
-    acme_domain: "{{ item | upper }}_HOST"
+    acme_domain: "{{ item | upper }}_server"
   set_fact:
-    real_domain: "{{ lookup('env', acme_domain) }}"
+    real_domain: "{{ lookup('vars', acme_domain) }}"
   tags:
     - gen_cert
 

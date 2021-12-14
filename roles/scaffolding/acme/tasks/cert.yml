@@ -25,7 +25,7 @@
     - gen_cert
 
 - name: Generate Certificate
-  command: "fish -c '~/.acme.sh/acme.sh --issue --dns dns_cf --server letsencrypt -d {{ real_domain }}'"
+  command: "fish -c '~/.acme.sh/acme.sh --issue --dns dns_cf --server letsencrypt -d {{ real_domain }} --debug'"
 
 - name: Install Certificate
   shell: "~/.acme.sh/acme.sh --install-cert -d {{ real_domain }} --key-file /root/certs/{{ real_domain }}/priv.key --fullchain-file /root/certs/{{ real_domain }}/fullchain.cer"
@@ -36,7 +36,7 @@
   local_action:
     module: mount
     src: "{{ jail_dir }}acme-sh/root/certs/{{ real_domain }}"
-    path: "{{ jail_dir }}{{ item }}/root/cert/"
+    path: "{{ jail_dir }}{{ item }}/root/cert"
     fstype: nullfs
     state: mounted
     opts: ro

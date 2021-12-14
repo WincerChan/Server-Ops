@@ -15,6 +15,18 @@
 
     - name: Enable Raw Socket Rustc Jail
       shell: "qjail config -k {{ jail_name }}"
+    
+    - name: Update IPv4 config
+      lineinfile:
+        path: "/usr/local/etc/qjail.config/{{ jail_name }}"
+        line: "ip4.addr            = {{ ipv4_interface }}|{{ jail_ipv4 }};"
+        regexp: "^ip4.addr"
+    - name: Update IPv6 config
+      lineinfile:
+        path: "/usr/local/etc/qjail.config/{{ jail_name }}"
+        line: "ip6.addr            = {{ ipv6_interface }}|{{ jail_ipv6 }};"
+        regexp: "^ip6.addr"
+
 
 
 - name: Start Jails

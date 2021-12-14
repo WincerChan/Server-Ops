@@ -2,7 +2,7 @@ all:
   hosts:
     crown:
       ansible_connection: local
-    acme:
+    acme-sh:
       ansible_connection: jail
     trojan:
       ansible_connection: jail
@@ -18,7 +18,7 @@ all:
 
     jails:
       hosts:
-        acme:
+        acme-sh:
         trojan:
         nginx:
         postgres:

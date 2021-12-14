@@ -4,13 +4,12 @@ all:
       ansible_connection: local
     acme:
       ansible_connection: jail
-      jail_ip: 10.5.0.13
     trojan:
       ansible_connection: jail
-      jail_ip: 10.5.0.15
     nginx:
       ansible_connection: jail
-      jail_ip: 10.5.0.86
+    postgres:
+      ansible_connection: jail
 
   children:
     deploy:
@@ -22,3 +21,4 @@ all:
         acme-sh:
         trojan:
         nginx:
+        postgres:

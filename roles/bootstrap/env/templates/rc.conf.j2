@@ -1,6 +1,6 @@
 hostname="entropy"
-ifconfig_em0="inet {{ ipv4_addr }}/{{ ipv4_router_prefix }}"
-ifconfig_{{ ipv6_interface }}_ipv6="inet6 {{ ipv6_addr }}/{{ ipv6_router_prefix }}"
+ifconfig_em0="inet {{ ipv4_addr }}{{ ipv4_router_prefix }}"
+ifconfig_{{ ipv6_interface }}_ipv6="inet6 {{ ipv6_addr }}{{ ipv6_router_prefix }}"
 ipv6_defaultrouter="{{ (ipv6_addr + ipv6_router_prefix) | nthhost(1) }}"
 defaultrouter="{{ (ipv4_addr + ipv4_router_prefix) | nthhost(1) }}"
 sshd_enable="YES"

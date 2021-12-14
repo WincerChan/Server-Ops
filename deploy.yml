@@ -10,6 +10,10 @@
   roles:
     - bootstrap/env
     - bootstrap/jails
+
+- name: Deploy Postgres
+  hosts: postgres
+  roles:
     - bootstrap/postgres
 
 - name: Deploy Nginx

@@ -1,6 +1,11 @@
 - name: Update IP Address
   set_fact:
-    jail_ipv4: "{{ (jail_ipv4 + ipv4_router_prefix) | ipaddr('next_usable') }}"
+    jail_ipv4: "{{ (jail_ipv4 + ipv4_router_prefix) | ansible.netcommon.ipaddr('next_usable') }}"
+
+- name: Update Host Route
+  lineinfile:
+    path: "/etc/hosts"
+    line: "{{ jail_ipv4 }} {{ item }}"
 
 - name: Update Current Jail
   lineinfile:

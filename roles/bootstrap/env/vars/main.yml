@@ -15,9 +15,9 @@ ipv6_addr: !vault |
           31323835646631303838386562636266326231333731323965346435386632656531
 
 ipv6_addr_prefix: 64
-ipv6_router_prefix: 48
+ipv6_router_prefix: '/48'
 ipv4_local: 10.5.0.1
-ipv4_router_prefix: 24
+ipv4_router_prefix: '/24'
 
 ipv4_interface: lo1
 ipv6_interface: em0

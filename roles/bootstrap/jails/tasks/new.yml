@@ -4,17 +4,29 @@
 
 - name: Update IP Address
   set_fact:
-    jail_ipv4: "{{ (jail_ipv4 + ipv4_router_prefix) | ipaddr('next_usable') }}"
-    jail_ipv6: "{{ (jail_ipv6 + ipv6_router_prefix) | ipaddr('next_usable') }}"
+    jail_ipv4: "{{ (jail_ipv4 + ipv4_router_prefix) | ansible.netcommon.ipaddr('next_usable') }}"
+    jail_ipv6: "{{ (jail_ipv6 + ipv6_router_prefix) | ansible.netcommon.ipaddr('next_usable') }}"
 
 - name:
   when: "'Error' in jail_check.stdout"
   block:
     - name: Create Qjail
-      shell: qjail create -4 {{ ipv4_interface }}|{{ jail_ipv4 }} -6 {{ ipv6_interface }}|{{ jail_ipv6 }} {{ jail_name }}
+      shell: qjail create -4 {{ jail_ipv4 }} -6 {{ jail_ipv6 }} {{ jail_name }}
 
     - name: Enable Raw Socket Rustc Jail
       shell: "qjail config -k {{ jail_name }}"
+    
+    - name: Update IPv4 config
+      lineinfile:
+        path: "/usr/local/etc/qjail.config/{{ jail_name }}"
+        line: "ip4.addr            = {{ ipv4_interface }}|{{ jail_ipv4 }};"
+        regexp: "^ip4.addr"
+    - name: Update IPv6 config
+      lineinfile:
+        path: "/usr/local/etc/qjail.config/{{ jail_name }}"
+        line: "ip6.addr            = {{ ipv6_interface }}|{{ jail_ipv6 }};"
+        regexp: "^ip6.addr"
+
 
 
 - name: Start Jails

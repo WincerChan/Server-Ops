@@ -1,5 +1,6 @@
-- include: host.yml
-  vars:
+- set_fact:
     jail_name: "{{ ansible_host }}"
+
+- include: host.yml
   delegate_to: localhost
 

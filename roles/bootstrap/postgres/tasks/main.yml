@@ -1,3 +1,5 @@
 - include: host.yml
+  vars:
+    jail_name: "{{ ansible_host }}"
   delegate_to: localhost
 

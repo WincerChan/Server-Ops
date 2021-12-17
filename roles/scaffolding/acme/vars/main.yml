@@ -1,2 +1,3 @@
 jails_cert:
   - trojan
+  - vaultwarden

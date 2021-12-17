@@ -1,0 +1,16 @@
+- name: Ensure Service Path
+  file:
+    path: /usr/local/etc/rc.d
+    state: directory
+
+- name: Setup Trojan Service
+  template:
+    src: trojan.j2
+    dest: /usr/local/etc/rc.d/trojan
+    mode: 0755
+
+- name: Enable Trojan Service
+  service:
+    name: trojan
+    state: started
+    enabled: yes

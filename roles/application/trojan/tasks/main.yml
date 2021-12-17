@@ -2,7 +2,7 @@
 
 - block:
   - include: ws_path.yml
-
+  - include: setup.yml
   - name: Configure trojan-go
     template:
       src: server.json.j2
@@ -11,5 +11,4 @@
 - name: Disable Cron
   service:
     name: cron
-    state: stopped
     enabled: no

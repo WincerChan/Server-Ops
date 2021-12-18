@@ -1,9 +1,9 @@
 - name: init db
-  shell: "jexec postgres /usr/local/etc/rc.d/postgresql init"
+  shell: "jexec postgres /usr/local/etc/rc.d/postgresql initdb"
 
 - name: Set log to std
   lineinfile:
-    path: "{{ jail_dir }}/var/db/postgres/data13/postgresql.conf"
+    path: "{{ jail_dir }}{{ jail_name }}/var/db/postgres/data13/postgresql.conf"
     regexp: "^log_destination"
     line: "log_destination=stderr"
 

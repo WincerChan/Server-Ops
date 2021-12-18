@@ -14,8 +14,7 @@
   file:
     path: "{{ jail_dir }}{{ jail_name }}/usr/local/share/psql"
     state: directory
-    owner: "postgres"
-    group: "postgres"
+    mode: 0777
 
 - name: Enable Socket 
   lineinfile:

@@ -12,7 +12,7 @@
     - bootstrap/jails
 
 - name: Deploy Postgres
-  hosts: postgres
+  hosts: deploy
   roles:
     - bootstrap/postgres
 
@@ -22,7 +22,7 @@
     - scaffolding/nginx
 
 - name: Deploy Acme-Sh
-  hosts: acme-sh
+  hosts: deploy
   environment:
     CF_Token: "{{ CF_Token }}"
     CF_Account_ID: "{{ CF_Account_ID }}"

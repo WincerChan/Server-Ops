@@ -10,9 +10,20 @@
   tags:
     - gen_cert
 
+- name: Check if Cert Path Exists
+  stat:
+    path: "{{ jail_dir }}acme-sh/root/certs/{{ real_domain }}"
+  register: cert_path
+  tags:
+    - gen_cert
+
+- set_fact:
+    cert_exist: "{{ cert_path.stat.exists }}"
+  tags:
+    - gen_cert
+
 - name: Create Certs Directory
-  local_action:
-    module: file
+  file:
     path: "{{ inside }}"
     state: directory
   loop:
@@ -21,24 +32,29 @@
     - "{{ jail_dir }}{{ item }}/root/cert"
   loop_control:
     loop_var: inside
+  when: not cert_exist
   tags:
     - gen_cert
 
 - name: Generate Certificate
-  command: "fish -c '~/.acme.sh/acme.sh --issue --dns dns_cf --server letsencrypt -d {{ real_domain }} --debug'"
+  command: "jexec acme-sh ~/.acme.sh/acme.sh --issue --dns dns_cf --server letsencrypt -d {{ real_domain }} --debug"
+  when: not cert_exist
+  tags:
+    - gen_cert
 
 - name: Install Certificate
-  shell: "~/.acme.sh/acme.sh --install-cert -d {{ real_domain }} --key-file /root/certs/{{ real_domain }}/priv.key --fullchain-file /root/certs/{{ real_domain }}/fullchain.cer"
+  shell: "jexec acme-sh ~/.acme.sh/acme.sh --install-cert -d {{ real_domain }} --key-file /root/certs/{{ real_domain }}/priv.key --fullchain-file /root/certs/{{ real_domain }}/fullchain.cer"
+  when: not cert_exist
   tags:
     - gen_cert
 
 - name: Mount Certs to Target
-  local_action:
-    module: mount
+  mount:
     src: "{{ jail_dir }}acme-sh/root/certs/{{ real_domain }}"
     path: "{{ jail_dir }}{{ item }}/root/cert"
     fstype: nullfs
     state: mounted
     opts: ro
+  when: not cert_exist
   tags:
     - gen_cert

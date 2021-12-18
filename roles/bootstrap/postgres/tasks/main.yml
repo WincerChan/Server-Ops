@@ -1,6 +1,7 @@
-- set_fact:
-    jail_name: "{{ ansible_host }}"
-
 - include: host.yml
-  delegate_to: localhost
+  vars:
+    jail_name: postgres
 
+- include_vars: roles/bootstrap/jails/vars/main.yml
+
+- include: setup.yml

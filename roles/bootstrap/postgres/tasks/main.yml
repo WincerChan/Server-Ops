@@ -5,7 +5,7 @@
 - include_vars: roles/bootstrap/jails/vars/main.yml
 
 - name: init db
-  shell: "jexec postgres /usr/local/etc/rc.d/postgresql init"
+  shell: "jexec postgres /usr/local/etc/rc.d/postgresql initdb"
 
 - name: Set log to std
   lineinfile:

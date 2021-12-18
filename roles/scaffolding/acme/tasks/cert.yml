@@ -15,7 +15,7 @@
     path: "{{ jail_dir }}acme-sh/root/certs/{{ real_domain }}"
   register: cert_path
   tags:
-    - always
+    - gen_cert
 
 - set_fact:
     cert_exist: "{{ cert_path.stat.exists }}"

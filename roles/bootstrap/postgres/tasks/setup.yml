@@ -10,6 +10,11 @@
     regexp: "^log_destination"
     line: "log_destination=stderr"
 
+- name: Ensure socket dir
+  file:
+    path: "{{ jail_dir }}{{ jail_name }}/usr/local/share/psql"
+    state: directory
+
 - name: Enable Socket 
   lineinfile:
     path: "{{ full_postgres_dir }}postgresql.conf"
@@ -29,4 +34,4 @@
     line: "unix_socket_permissions = 0777"
 
 - name: Restart
-  shell: "jexec postgres service postgresql restart"
+  shell: "jexec postgres service postgresql start"

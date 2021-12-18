@@ -2,7 +2,7 @@
   vars:
     jail_name: postgres
 
-- include_var: roles/bootstrap/jails/vars/main.yml
+- include_vars: roles/bootstrap/jails/vars/main.yml
 
 - name: init db
   shell: "jexec postgres /usr/local/etc/rc.d/postgresql init"

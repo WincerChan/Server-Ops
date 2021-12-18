@@ -1,6 +1,15 @@
-- set_fact:
-    jail_name: "{{ ansible_host }}"
-
 - include: host.yml
-  delegate_to: localhost
+  vars:
+    jail_name: postgres
 
+- include_var: roles/bootstrap/jails/vars/main.yml
+
+- name: init db
+  shell: "jexec postgres /usr/local/etc/rc.d/postgresql init"
+
+- name: Set log to std
+  lineinfile:
+    path: "{{ jail_dir }}/var/db/postgres/data13/postgresql.conf"
+    regexp: "^log_destination"
+    line: "log_destination=stderr"
+    

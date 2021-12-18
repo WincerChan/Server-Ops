@@ -12,7 +12,7 @@
     - bootstrap/jails
 
 - name: Deploy Postgres
-  hosts: postgres
+  hosts: deploy
   roles:
     - bootstrap/postgres
 

@@ -1,0 +1,29 @@
+- name: init db
+  shell: "jexec postgres /usr/local/etc/rc.d/postgresql init"
+
+- name: Set log to std
+  lineinfile:
+    path: "{{ jail_dir }}/var/db/postgres/data13/postgresql.conf"
+    regexp: "^log_destination"
+    line: "log_destination=stderr"
+
+- name: Enable Socket 
+  lineinfile:
+    path: "{{ jail_dir }}/var/db/postgres/data13/postgresql.conf"
+    regexp: "^#unix_socket_directories"
+    line: "unix_socket_directories = '/usr/local/share/psql'"
+
+- name: Ensure socket group
+  lineinfile:
+    path: "{{ jail_dir }}/var/db/postgres/data13/postgresql.conf"
+    regexp: "^#unix_socket_group"
+    line: "unix_socket_group = 'wheel'"
+
+- name: Ensure socket permission
+  lineinfile:
+    path: "{{ jail_dir }}/var/db/postgres/data13/postgresql.conf"
+    regexp: "^#unix_socket_permissions"
+    line: "unix_socket_permissions = 0777"
+
+- name: Restart
+  shell: "jexec postgres service postgresql restart"

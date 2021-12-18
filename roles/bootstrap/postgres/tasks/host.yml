@@ -10,3 +10,9 @@
     line: "sysvmsg		    = \"new\";\nsysvsem             = \"new\";\nsysvshm             = \"new\";"
     insertbefore: "^}"
     state: present
+
+- name: Enable PostgreSQL
+  community.general.sysrc:
+    name: postgresql_enable
+    value: "YES"
+    jail: "postgres"

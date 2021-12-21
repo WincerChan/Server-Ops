@@ -12,7 +12,7 @@
     hour: "1"
     job: /usr/local/bin/backup
 
-- include_var: roles/bootstrap/postgres/vars/main.yml
+- include_vars: roles/bootstrap/postgres/vars/main.yml
 
 - name: Ensure Target Dir
   file:

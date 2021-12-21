@@ -36,3 +36,10 @@
     - application/trojan
   tags:
     - trojan
+
+- name: Install Vaultwarden
+  hosts: deploy
+  roles:
+    - application/vaultwarden
+  tags:
+    - vaultwarden

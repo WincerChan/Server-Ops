@@ -1,0 +1,13 @@
+- include_var: roles/bootstrap/jails/vars/main.yml
+
+- name: Backup Sh Exec
+  template:
+    src: backup.sh.j2
+    dest: "/usr/local/bin/backup"
+    mode: '0755'
+
+- name: Crontab
+  cron:
+    name: "daily backup"
+    hour: "1"
+    job: /usr/local/bin/backup

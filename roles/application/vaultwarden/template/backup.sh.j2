@@ -1,0 +1,35 @@
+#!/bin/sh
+
+export jail_dir={{jail_dir}}
+export pg_path=/usr/local/share/psql/
+export attach_path={{ attach_path }}
+export pass={{encrypt_password}}
+export access_token={{access_token}}
+
+export today=$(date "+%Y%m%d")
+
+cd /tmp
+
+# 1: dump and encrypt postgres data
+echo 1
+jexec postgres pg_dumpall -U postgres -h $pg_path | xz -T 0 | openssl enc -bf -nosalt -pbkdf2 -pass pass:$pass > postgres-$today.xe
+
+# 2: compress and encrypt attachments directory
+echo 2
+jexec vaultwarden tar -cJf - -C $attach_path attachments/ | openssl enc -bf -nosalt -pbkdf2 -pass pass:$pass > attachments-$today.xe
+
+# 3: gather these files
+echo 3
+tar -cf secret-backup-$today.tar *.xe 
+
+# 4: upload to dropbox
+echo 4
+curl -X POST https://content.dropboxapi.com/2/files/upload \
+    --header "Authorization: Bearer $access_token" \
+    --header "Dropbox-API-Arg: {\"path\": \"/secret-backup-$today.tar\"}" \
+    --header "Content-Type: application/octet-stream" \
+    --data-binary @secret-backup-$today.tar
+
+# 5: cleanup
+echo 5
+rm *.xe secret*.tar

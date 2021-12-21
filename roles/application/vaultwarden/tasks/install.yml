@@ -1,0 +1,24 @@
+- name: Install Bitwarden
+  pkgng:
+    name: vaultwarden
+    jail: vaultwarden
+    state: present
+
+- name: Enable Vaultwarden
+  sysrc:
+    name: vaultwarden_enable
+    value: 'YES'
+    jail: vaultwarden
+
+- name: Gen Random Password
+  shell: 'openssl rand -base64 48'
+  register: random_password
+
+- include_var: roles/bootstrap/jails/vars/main.yml
+
+- name: Copy Vaultwarden
+  vars:
+    token: "{{ random_password.stdout }}"
+  template:
+    src: vaultwarden.j2
+    dest: "{{ jail_dir }}/usr/local/etc/rc.conf.d/vaultwarden"

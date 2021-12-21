@@ -11,3 +11,18 @@
     name: "daily backup"
     hour: "1"
     job: /usr/local/bin/backup
+
+- include_var: roles/bootstrap/postgres/vars/main.yml
+
+- name: Ensure Target Dir
+  file:
+    dest: "{{ jail_dir }}vaultwarden/{{socket_dir}}"
+    state: directory
+
+- name: Mount Postgres Socket
+  mount:
+    src: "{{ jail_dir }}postgres/{{socket_dir}}"
+    dest: "{{ jail_dir }}vaultwarden/{{socket_dir}}"
+    fstype: nullfs
+    opts: ro
+    state: mounted

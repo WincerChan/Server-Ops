@@ -20,7 +20,7 @@
   lineinfile:
     path: "{{ full_postgres_dir }}postgresql.conf"
     regexp: "^#unix_socket_directories"
-    line: "unix_socket_directories = '/usr/local/share/psql'"
+    line: "unix_socket_directories = '{{ socket_dir }}'"
 
 - name: Ensure socket group
   lineinfile:

@@ -1,2 +1,3 @@
 pg_version: 13
 jail_name: postgres
+socket_dir: /usr/local/share/psql

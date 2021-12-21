@@ -22,7 +22,7 @@
 - name: Mount Postgres Socket
   mount:
     src: "{{ jail_dir }}postgres/{{socket_dir}}"
-    dest: "{{ jail_dir }}vaultwarden/{{socket_dir}}"
+    path: "{{ jail_dir }}vaultwarden/{{socket_dir}}"
     fstype: nullfs
     opts: ro
     state: mounted

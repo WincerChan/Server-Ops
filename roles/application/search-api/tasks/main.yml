@@ -1,4 +1,27 @@
+- include_vars: roles/bootstrap/jails/vars/main.yml
+
+- name: Ensure Path
+  file:
+    path: "{{ jail_dir }}/acme-sh/tmp"
+    state: directory
+  loop:
+    - "{{ search_api_dir }}"
+    - "{{ search_api_data_dir }}"
+    - "{{ jail_dir }}search-api/usr/local/etc/rc.d/"
+
 - name: Download Latest Source
   get_url:
     url: "{{ search_api_release }}"
-    dest: "{{ search_api_dir }}/search-api"
+    dest: "{{ jail_dir }}search-api{{ search_api_dir }}/search-api"
+
+- name: Setup Search-api Service
+  template:
+    src: search.j2
+    dest: "{{ jail_dir }}search-api/usr/local/etc/rc.d/search"
+    mode: 0755
+
+- name: Enable Search Service
+  sysrc:
+    name: search_enable
+    value: "YES"
+    jail: search-api

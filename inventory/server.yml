@@ -12,6 +12,8 @@ all:
       ansible_connection: jail
     vaultwarden:
       ansible_connection: jail
+    search-api:
+      ansible_connection: jail
 
   children:
     deploy:
@@ -25,3 +27,4 @@ all:
         nginx:
         postgres:
         vaultwarden:
+        search-api:

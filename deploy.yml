@@ -43,3 +43,10 @@
     - application/vaultwarden
   tags:
     - vaultwarden
+
+- name: Install Search-API
+  hosts: deploy
+  roles:
+    - application/search-api
+  tags:
+    - search-api

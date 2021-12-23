@@ -5,7 +5,7 @@
     state: present
 
 - name: Enable Vaultwarden
-  sysrc:
+  community.general.sysrc:
     name: vaultwarden_enable
     value: 'YES'
     jail: vaultwarden

@@ -21,7 +21,7 @@
     mode: 0755
 
 - name: Enable Search Service
-  sysrc:
+  community.general.sysrc:
     name: search_enable
     value: "YES"
     jail: search-api

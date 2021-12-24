@@ -50,3 +50,10 @@
     - application/search-api
   tags:
     - search-api
+
+- name: Install Gateway API
+  hosts: deploy
+  roles:
+    - application/api-gateway
+  tags:
+    - gateway

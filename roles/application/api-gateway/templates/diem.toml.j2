@@ -1,0 +1,22 @@
+config_dir = "/root/gateway/config"
+
+log-path = "_logs"
+
+[hitokoto]
+dbpath = "bbolt"
+source = "hito"
+
+[rate-limit]
+network = "uds"  # or uds
+poolsize = 5
+addr = "ral.sock"  # if "tcp", this field should be host:addr
+enable = false
+
+[search]
+network = "tcp"  # or uds
+poolsize = 1
+addr = "127.0.0.1:8002"
+
+[credential]
+analytics-id = "153425181"
+filename = "credential.json"

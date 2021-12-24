@@ -1,0 +1,21 @@
+- include_vars: roles/bootstrap/jails/vars/main.yml
+
+- name: Ensure Path
+  file:
+    path: "{{ jail_dir }}api-gateway{{ gateway_dir }}{{ item }}"
+    state: directory
+  loop:
+    - "/"
+    - "/config"
+
+- name: Download DIEM-API
+  get_url:
+    url: "{{ gateway_release }}"
+    dest: "{{ jail_dir }}api-gateway{{ gateway_dir }}/apis"
+    mode: 0700
+
+- name: Remove trojan-go.zip
+  file:
+    path: /tmp/trojan-go.zip
+    state: absent
+

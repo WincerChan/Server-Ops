@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# PROVIDE: gateway
+# REQUIRE: networking
+# KEYWORD: 
+ 
+. /etc/rc.subr
+ 
+name="gateway"
+rcvar="gateway_enable"
+command="/root/gateway/apis -config /root/gateway/config.json"
+gateway_user="root"
+pidfile="/var/run/${name}.pid"
+ 
+start_cmd="gateway_start"
+stop_cmd="gateway_stop"
+status_cmd="gateway_status"
+
+gateway_start() {
+        /usr/sbin/daemon -P ${pidfile} -r -f -u $gateway_user $command
+}
+
+gateway_stop() {
+        if [ -e "${pidfile}" ]; then
+                kill -s TERM `cat ${pidfile}`
+        else
+                echo "${name} is not running"
+        fi
+
+}
+
+gateway_status() {
+        if [ -e "${pidfile}" ]; then
+                echo "${name} is running as pid `cat ${pidfile}`"
+        else
+                echo "${name} is not running"
+        fi
+}
+ 
+load_rc_config $name
+: ${gateway_enable:=no}
+ 
+run_rc_command "$1"

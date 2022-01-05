@@ -2,11 +2,12 @@
 
 - name: Ensure Path
   file:
-    path: "{{ jail_dir }}api-gateway{{ gateway_dir }}{{ item }}"
+    path: "{{ jail_dir }}api-gateway{{ item }}"
     state: directory
   loop:
-    - "/"
-    - "/config"
+    - "{{ gateway_dir }}/"
+    - "{{ gateway_dir }}/config"
+    - "/usr/local/etc/rc.d/"
 
 - name: Download DIEM-API
   get_url:

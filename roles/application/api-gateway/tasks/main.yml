@@ -14,8 +14,19 @@
     dest: "{{ jail_dir }}api-gateway{{ gateway_dir }}/apis"
     mode: 0700
 
-- name: Remove trojan-go.zip
-  file:
-    path: /tmp/trojan-go.zip
-    state: absent
+- name: Gen Config
+  template:
+    src: diem.toml.j2
+    dest: "{{ jail_dir }}api-gateway{{ gateway_dir }}/config/diem.toml"
+    mode: 0600
 
+- name: Copy as Service
+  template:
+    src: gateway.j2
+    dest: "{{ jail_dir }}api-gateway/usr/local/etc/rc.d/apis"
+
+- name: Enable Search Service
+  community.general.sysrc:
+    name: apis_enable
+    value: "YES"
+    jail: api-gateway

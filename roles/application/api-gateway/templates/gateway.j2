@@ -8,7 +8,7 @@
  
 name="gateway"
 rcvar="gateway_enable"
-command="/root/gateway/apis -config /root/gateway/config.json"
+command="{{ gateway_dir }}apis -config {{gateway_dir}}config/diem.toml"
 gateway_user="root"
 pidfile="/var/run/${name}.pid"
  

@@ -8,6 +8,8 @@
     - "{{ gateway_dir }}/"
     - "{{ gateway_dir }}/config"
     - "/usr/local/etc/rc.d/"
+    - "/usr/local/etc/rc.conf.d/"
+     - "{{ base_dir }}"
 
 - name: Download DIEM-API
   get_url:
@@ -24,10 +26,17 @@
 - name: Copy as Service
   template:
     src: gateway.j2
-    dest: "{{ jail_dir }}api-gateway/usr/local/etc/rc.d/apis"
+    dest: "{{ jail_dir }}api-gateway/usr/local/etc/rc.d/gateway"
+    mode: 0755
+
+- name: Config Gateway Conf
+  template:
+    src: gateway.conf.j2
+    dest: "{{ jail_dir }}api-gateway/usr/local/etc/rc.conf.d/gateway"
+    mode: 0644
 
 - name: Enable Search Service
   community.general.sysrc:
-    name: apis_enable
+    name: gateway_enable
     value: "YES"
     jail: api-gateway

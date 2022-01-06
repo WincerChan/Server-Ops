@@ -1,2 +1,3 @@
 gateway_release: https://github.com/WincerChan/DIEM-API/releases/latest/download/diem-api-freebsd-amd64
 gateway_dir: /root/gateway/
+base_dir: /root/data/
